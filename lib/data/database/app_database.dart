@@ -27,7 +27,11 @@ class WebStorageReport {
   final String implementation;
   final List<String> missingFeatures;
 
-  bool get isDurable => !implementation.toLowerCase().contains('memory');
+  /// drift's `unsafeIndexedDb` is what it falls back to without shared workers
+  /// (Chrome on Android) or COOP/COEP: writes from a second tab can be lost.
+  static const _nonDurableImplementations = {'inMemory', 'unsafeIndexedDb'};
+
+  bool get isDurable => !_nonDurableImplementations.contains(implementation);
 }
 
 @DriftDatabase(

@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'date_bounds.dart';
 import 'time_of_day_value.dart';
 
 part 'stamp_window.freezed.dart';
@@ -32,8 +33,7 @@ abstract class StampWindow with _$StampWindow {
 
   /// Whether a stamp can be collected at [moment].
   bool contains(DateTime moment) {
-    if (validFrom != null && moment.isBefore(validFrom!)) return false;
-    if (validTo != null && moment.isAfter(validTo!)) return false;
+    if (!withinDateBounds(moment, from: validFrom, to: validTo)) return false;
 
     final time = TimeOfDayValue(hour: moment.hour, minute: moment.minute);
     if (!crossesMidnight) {
