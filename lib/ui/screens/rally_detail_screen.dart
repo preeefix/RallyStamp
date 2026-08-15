@@ -49,10 +49,17 @@ class RallyDetailScreen extends ConsumerWidget {
         error: (error, _) => Center(child: Text('$error')),
         data: (items) {
           if (items.isEmpty) {
-            return EmptyState(
-              icon: Icons.approval_outlined,
-              title: l10n.rallyStationsEmpty,
-              message: l10n.rallyStationsEmptyHint,
+            return Column(
+              children: [
+                if (rally != null) _RallyHeader(rally: rally),
+                Expanded(
+                  child: EmptyState(
+                    icon: Icons.approval_outlined,
+                    title: l10n.rallyStationsEmpty,
+                    message: l10n.rallyStationsEmptyHint,
+                  ),
+                ),
+              ],
             );
           }
           final ordered = [...items]..sort(_bySequenceThenName(stations));
