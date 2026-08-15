@@ -81,6 +81,16 @@ void main() {
       expect(limited.contains(DateTime(2026, 8, 21, 12)), isFalse);
     });
 
+    test('the validity bounds include the whole first and last day', () {
+      final limited = window(
+        validFrom: DateTime(2026, 8, 10),
+        validTo: DateTime(2026, 8, 20),
+      );
+      expect(limited.contains(DateTime(2026, 8, 10, 12)), isTrue);
+      expect(limited.contains(DateTime(2026, 8, 20, 12)), isTrue);
+      expect(limited.contains(DateTime(2026, 8, 20, 16, 59)), isTrue);
+    });
+
     test('survives a JSON round trip', () {
       final original = window(
         start: '10:30',

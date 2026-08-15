@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../value_objects/date_bounds.dart';
 import '../value_objects/stamp_window.dart';
 
 part 'rally.freezed.dart';
@@ -28,11 +29,8 @@ abstract class Rally with _$Rally {
 
   bool get isDeleted => deletedAt != null;
 
-  bool isActiveOn(DateTime day) {
-    if (startsOn != null && day.isBefore(startsOn!)) return false;
-    if (endsOn != null && day.isAfter(endsOn!)) return false;
-    return true;
-  }
+  bool isActiveOn(DateTime day) =>
+      withinDateBounds(day, from: startsOn, to: endsOn);
 }
 
 /// Rally-specific overlay data for one station participating in a rally.
