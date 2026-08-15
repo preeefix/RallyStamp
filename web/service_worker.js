@@ -5,8 +5,10 @@
 // build so the exact asset set of that build is cached.
 //
 // Strategy:
-//   * navigations: network first, falling back to the cached shell when offline
-//   * same-origin assets: cache first (they are content-versioned by the build)
+//   * documents: network first, falling back to the cached shell when the
+//     network or the origin is unreachable
+//   * same-origin assets: cache first (they are content-versioned by the build),
+//     falling back to the cache on a failed revalidation
 //   * everything else: passthrough
 
 const CACHE_VERSION = '__CACHE_VERSION__';
@@ -49,32 +51,36 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
 
-  if (request.mode === 'navigate') {
-    event.respondWith(
-      (async () => {
-        try {
-          return await fetch(request);
-        } catch (_) {
-          const cache = await caches.open(CACHE_NAME);
-          const shell = await cache.match(SHELL_URL);
-          if (shell) return shell;
-          return new Response('Offline', { status: 503, statusText: 'Offline' });
-        }
-      })(),
-    );
-    return;
-  }
+  // Chrome reports some top-level loads without the `navigate` mode, so the
+  // destination decides too: a document must never fail to a browser error page
+  // while the shell is cached.
+  const isDocument =
+    request.mode === 'navigate' || request.destination === 'document';
 
   event.respondWith(
     (async () => {
       const cache = await caches.open(CACHE_NAME);
-      const cached = await cache.match(request);
-      if (cached) return cached;
-      const response = await fetch(request);
-      if (response && response.status === 200 && response.type === 'basic') {
-        cache.put(request, response.clone());
+      if (!isDocument) {
+        const cached = await cache.match(request);
+        if (cached) return cached;
       }
-      return response;
+
+      try {
+        const response = await fetch(request);
+        if (
+          !isDocument &&
+          response &&
+          response.status === 200 &&
+          response.type === 'basic'
+        ) {
+          cache.put(request, response.clone());
+        }
+        return response;
+      } catch (_) {
+        const fallback = await cache.match(isDocument ? SHELL_URL : request);
+        if (fallback) return fallback;
+        return new Response('Offline', { status: 503, statusText: 'Offline' });
+      }
     })(),
   );
 });

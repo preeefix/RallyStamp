@@ -90,6 +90,306 @@
       }
     }
   },
+  "save": "Save",
+  "@save": {
+    "description": "Label of the button saving a form"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Label of the button dismissing a dialog without changes"
+  },
+  "delete": "Delete",
+  "@delete": {
+    "description": "Label of the button deleting a record"
+  },
+  "add": "Add",
+  "@add": {
+    "description": "Label of the button confirming an addition"
+  },
+  "remove": "Remove",
+  "@remove": {
+    "description": "Label of the button removing an item from a list"
+  },
+  "deleteStationTitle": "Delete station?",
+  "@deleteStationTitle": {
+    "description": "Title of the station delete confirmation dialog"
+  },
+  "deleteStationBody": "{name} will be hidden from lists. Rallies and past runs keep their history.",
+  "@deleteStationBody": {
+    "description": "Body of the station delete confirmation dialog",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteRallyTitle": "Delete rally?",
+  "@deleteRallyTitle": {
+    "description": "Title of the rally delete confirmation dialog"
+  },
+  "deleteRallyBody": "{name} will be hidden from lists. Past runs keep their history.",
+  "@deleteRallyBody": {
+    "description": "Body of the rally delete confirmation dialog",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "newStation": "New station",
+  "@newStation": {
+    "description": "Title of the station form when creating a station"
+  },
+  "editStation": "Edit station",
+  "@editStation": {
+    "description": "Title of the station form when editing a station"
+  },
+  "searchStations": "Search stations",
+  "@searchStations": {
+    "description": "Placeholder of the station search field"
+  },
+  "noStationsMatch": "No stations match your search",
+  "@noStationsMatch": {
+    "description": "Shown when the station search returns nothing"
+  },
+  "fieldName": "Name",
+  "@fieldName": {
+    "description": "Label of the name field"
+  },
+  "fieldNameLocal": "Local name",
+  "@fieldNameLocal": {
+    "description": "Label of the station name in the local language"
+  },
+  "fieldAliases": "Aliases",
+  "@fieldAliases": {
+    "description": "Label of the station aliases field"
+  },
+  "fieldLatitude": "Latitude",
+  "@fieldLatitude": {
+    "description": "Label of the latitude field"
+  },
+  "fieldLongitude": "Longitude",
+  "@fieldLongitude": {
+    "description": "Label of the longitude field"
+  },
+  "fieldAddress": "Address",
+  "@fieldAddress": {
+    "description": "Label of the address field"
+  },
+  "fieldOperator": "Operator",
+  "@fieldOperator": {
+    "description": "Label of the railway operator field"
+  },
+  "fieldLines": "Lines",
+  "@fieldLines": {
+    "description": "Label of the railway lines field"
+  },
+  "fieldTags": "Tags",
+  "@fieldTags": {
+    "description": "Label of the tags field"
+  },
+  "fieldNotes": "Notes",
+  "@fieldNotes": {
+    "description": "Label of the notes field"
+  },
+  "fieldOrganizer": "Organizer",
+  "@fieldOrganizer": {
+    "description": "Label of the rally organizer field"
+  },
+  "fieldDescription": "Description",
+  "@fieldDescription": {
+    "description": "Label of the rally description field"
+  },
+  "fieldUrl": "URL",
+  "@fieldUrl": {
+    "description": "Label of a link URL field"
+  },
+  "fieldLabel": "Label",
+  "@fieldLabel": {
+    "description": "Label of a link label field"
+  },
+  "fieldStartsOn": "Starts on",
+  "@fieldStartsOn": {
+    "description": "Label of the rally start date field"
+  },
+  "fieldEndsOn": "Ends on",
+  "@fieldEndsOn": {
+    "description": "Label of the rally end date field"
+  },
+  "commaSeparatedHint": "Comma separated",
+  "@commaSeparatedHint": {
+    "description": "Helper text for fields holding a comma separated list"
+  },
+  "notSet": "Not set",
+  "@notSet": {
+    "description": "Placeholder shown for an optional value that is empty"
+  },
+  "clear": "Clear",
+  "@clear": {
+    "description": "Tooltip of the button clearing an optional value"
+  },
+  "validationRequired": "Required",
+  "@validationRequired": {
+    "description": "Validation message for an empty required field"
+  },
+  "validationLatitude": "Enter a latitude between -90 and 90",
+  "@validationLatitude": {
+    "description": "Validation message for an out of range latitude"
+  },
+  "validationLongitude": "Enter a longitude between -180 and 180",
+  "@validationLongitude": {
+    "description": "Validation message for an out of range longitude"
+  },
+  "validationUrl": "Enter a http(s) URL",
+  "@validationUrl": {
+    "description": "Validation message for a malformed URL"
+  },
+  "validationEndBeforeStart": "End date is before the start date",
+  "@validationEndBeforeStart": {
+    "description": "Validation message when a rally ends before it starts"
+  },
+  "sectionLinks": "Map links",
+  "@sectionLinks": {
+    "description": "Heading of the station map links section"
+  },
+  "addLink": "Add link",
+  "@addLink": {
+    "description": "Label of the button adding a map link"
+  },
+  "linkKindGoogleMaps": "Google Maps",
+  "@linkKindGoogleMaps": {
+    "description": "Name of the Google Maps link kind"
+  },
+  "linkKindAppleMaps": "Apple Maps",
+  "@linkKindAppleMaps": {
+    "description": "Name of the Apple Maps link kind"
+  },
+  "linkKindNavitime": "Navitime",
+  "@linkKindNavitime": {
+    "description": "Name of the Navitime link kind"
+  },
+  "linkKindJorudan": "Jorudan",
+  "@linkKindJorudan": {
+    "description": "Name of the Jorudan link kind"
+  },
+  "linkKindOfficialSite": "Official site",
+  "@linkKindOfficialSite": {
+    "description": "Name of the official site link kind"
+  },
+  "linkKindCustom": "Other",
+  "@linkKindCustom": {
+    "description": "Name of the custom link kind"
+  },
+  "openLinkFailed": "Could not open the link",
+  "@openLinkFailed": {
+    "description": "Snack bar shown when a map link cannot be opened"
+  },
+  "newRally": "New rally",
+  "@newRally": {
+    "description": "Title of the rally form when creating a rally"
+  },
+  "editRally": "Edit rally",
+  "@editRally": {
+    "description": "Title of the rally form when editing a rally"
+  },
+  "rallyStationsEmpty": "No stations in this rally",
+  "@rallyStationsEmpty": {
+    "description": "Empty state on the rally detail screen"
+  },
+  "rallyStationsEmptyHint": "Add the stations where stamps can be collected.",
+  "@rallyStationsEmptyHint": {
+    "description": "Hint below the rally stations empty state"
+  },
+  "addStations": "Add stations",
+  "@addStations": {
+    "description": "Title of the station picker and label of the button opening it"
+  },
+  "addStationsSelected": "Add {count} selected",
+  "@addStationsSelected": {
+    "description": "Label of the picker button confirming the selection",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "allStationsAdded": "Every station is already in this rally",
+  "@allStationsAdded": {
+    "description": "Empty state of the station picker when nothing is left to add"
+  },
+  "allStationsAddedHint": "Add a new station to your library to include it in this rally.",
+  "@allStationsAddedHint": {
+    "description": "Hint below the picker's all-stations-added empty state"
+  },
+  "removeStationTitle": "Remove from rally?",
+  "@removeStationTitle": {
+    "description": "Title of the confirmation removing a station from a rally"
+  },
+  "removeStationBody": "{name} and its rally-specific stamp details will be removed from this rally.",
+  "@removeStationBody": {
+    "description": "Body of the confirmation removing a station from a rally",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "stationDetailsForRally": "Stamp details",
+  "@stationDetailsForRally": {
+    "description": "Title of the per-rally station overlay editor"
+  },
+  "fieldStampLocation": "Stamp location",
+  "@fieldStampLocation": {
+    "description": "Label of the field describing where the stamp is at a station"
+  },
+  "fieldStampCode": "Stamp code",
+  "@fieldStampCode": {
+    "description": "Label of the rally's identifier for a stamp"
+  },
+  "fieldSequenceHint": "Suggested order",
+  "@fieldSequenceHint": {
+    "description": "Label of the rally's suggested visiting position for a station"
+  },
+  "fieldRequiresPurchase": "Requires a purchase",
+  "@fieldRequiresPurchase": {
+    "description": "Label of the switch marking a stamp as purchase-gated"
+  },
+  "validationWholeNumber": "Enter a whole number",
+  "@validationWholeNumber": {
+    "description": "Validation message for a non-numeric integer field"
+  },
+  "sectionStampWindows": "Stamp availability",
+  "@sectionStampWindows": {
+    "description": "Heading of the stamp availability windows section"
+  },
+  "stampWindowsDefaultHint": "Leave empty to use the rally's default hours.",
+  "@stampWindowsDefaultHint": {
+    "description": "Hint explaining that empty station windows fall back to rally defaults"
+  },
+  "stampWindowsRallyHint": "These hours apply to every station without its own.",
+  "@stampWindowsRallyHint": {
+    "description": "Hint explaining rally-wide default windows"
+  },
+  "addStampWindow": "Add hours",
+  "@addStampWindow": {
+    "description": "Label of the button adding a stamp availability window"
+  },
+  "everyDay": "Every day",
+  "@everyDay": {
+    "description": "Shown when a stamp window applies on all weekdays"
+  },
+  "stampWindowRange": "{start} - {end}",
+  "@stampWindowRange": {
+    "description": "Start and end time of a stamp availability window",
+    "placeholders": {
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  },
   "distanceKilometers": "{value} km",
   "@distanceKilometers": {
     "description": "Straight-line distance in kilometres",
