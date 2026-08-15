@@ -1,0 +1,23 @@
+# Headers for static hosts that read a `_headers` file (Cloudflare Pages, Netlify).
+#
+# COOP/COEP let drift use the fast, multi-tab-safe storage path. Without them
+# Chrome on Android cannot share the database between tabs, which risks losing
+# run data, so they are not optional for this app.
+/*
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Embedder-Policy: require-corp
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+# The service worker must never be served stale, or updates never land.
+/service_worker.js
+  Cache-Control: no-cache
+
+/index.html
+  Cache-Control: no-cache
+
+/flutter_bootstrap.js
+  Cache-Control: no-cache
+
+/sqlite3.wasm
+  Content-Type: application/wasm

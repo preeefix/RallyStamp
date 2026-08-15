@@ -1,0 +1,102 @@
+{
+  "@@locale": "en",
+  "appTitle": "RallyStamp",
+  "@appTitle": {
+    "description": "Application name shown in the app bar and installed PWA"
+  },
+  "navRun": "Run",
+  "@navRun": {
+    "description": "Bottom navigation label for the active run tab"
+  },
+  "navRallies": "Rallies",
+  "@navRallies": {
+    "description": "Bottom navigation label for the rallies tab"
+  },
+  "navRoutes": "Routes",
+  "@navRoutes": {
+    "description": "Bottom navigation label for the routes tab"
+  },
+  "navStations": "Stations",
+  "@navStations": {
+    "description": "Bottom navigation label for the stations tab"
+  },
+  "navHistory": "History",
+  "@navHistory": {
+    "description": "Bottom navigation label for the run history and stats tab"
+  },
+  "runTabTitle": "Current run",
+  "@runTabTitle": {
+    "description": "Title of the active run screen"
+  },
+  "noActiveRun": "No run in progress",
+  "@noActiveRun": {
+    "description": "Empty state shown when no run is active"
+  },
+  "noActiveRunHint": "Start a run from one of your routes to begin collecting stamps.",
+  "@noActiveRunHint": {
+    "description": "Hint below the no-active-run empty state"
+  },
+  "stationsEmpty": "No stations yet",
+  "@stationsEmpty": {
+    "description": "Empty state on the stations screen"
+  },
+  "stationsEmptyHint": "Add the stations you visit so they can be reused across rallies.",
+  "@stationsEmptyHint": {
+    "description": "Hint below the stations empty state"
+  },
+  "ralliesEmpty": "No rallies yet",
+  "@ralliesEmpty": {
+    "description": "Empty state on the rallies screen"
+  },
+  "ralliesEmptyHint": "Create a rally and pick the stations taking part in it.",
+  "@ralliesEmptyHint": {
+    "description": "Hint below the rallies empty state"
+  },
+  "routesEmpty": "No routes yet",
+  "@routesEmpty": {
+    "description": "Empty state on the routes screen"
+  },
+  "routesEmptyHint": "Plan the order you will visit stations in, then start a run from it.",
+  "@routesEmptyHint": {
+    "description": "Hint below the routes empty state"
+  },
+  "historyEmpty": "No completed runs yet",
+  "@historyEmpty": {
+    "description": "Empty state on the history screen"
+  },
+  "historyEmptyHint": "Finished runs and their stats will appear here.",
+  "@historyEmptyHint": {
+    "description": "Hint below the history empty state"
+  },
+  "storageWarningTitle": "Storage may not be durable",
+  "@storageWarningTitle": {
+    "description": "Title of the banner warning that the browser fell back to non-durable storage"
+  },
+  "storageWarningBody": "This browser only offers temporary storage for RallyStamp, so data could be lost. Install the app or use another browser to keep your runs.",
+  "@storageWarningBody": {
+    "description": "Body of the non-durable storage warning banner"
+  },
+  "dismiss": "Dismiss",
+  "@dismiss": {
+    "description": "Label of the button dismissing a banner"
+  },
+  "stationCount": "{count, plural, =0{No stations} =1{1 station} other{{count} stations}}",
+  "@stationCount": {
+    "description": "Number of stations in a rally or route",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "distanceKilometers": "{value} km",
+  "@distanceKilometers": {
+    "description": "Straight-line distance in kilometres",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  }
+}
