@@ -1,7 +1,7 @@
 {
     "name": "RallyStamp",
     "short_name": "RallyStamp",
-    "start_url": "./run",
+    "start_url": "./",
     "scope": "./",
     "display": "standalone",
     "orientation": "portrait",

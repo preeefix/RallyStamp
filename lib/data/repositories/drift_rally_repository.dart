@@ -65,10 +65,23 @@ class DriftRallyRepository implements RallyRepository {
     for (final row in await _liveRallyStations(rallyId).get()) row.toDomain(),
   ];
 
+  /// Removing a station only soft-deletes its row, but `(rallyId, stationId)`
+  /// is unique, so the stale row is dropped before a station is re-added.
   @override
-  Future<void> saveStation(RallyStation rallyStation) => _db
-      .into(_db.rallyStationRows)
-      .insertOnConflictUpdate(rallyStation.toCompanion());
+  Future<void> saveStation(RallyStation rallyStation) =>
+      _db.transaction(() async {
+        await (_db.delete(_db.rallyStationRows)..where(
+              (row) =>
+                  row.rallyId.equals(rallyStation.rallyId) &
+                  row.stationId.equals(rallyStation.stationId) &
+                  row.id.equals(rallyStation.id).not() &
+                  row.deletedAt.isNotNull(),
+            ))
+            .go();
+        await _db
+            .into(_db.rallyStationRows)
+            .insertOnConflictUpdate(rallyStation.toCompanion());
+      });
 
   @override
   Future<void> removeStation(

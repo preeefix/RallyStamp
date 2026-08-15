@@ -31,11 +31,21 @@ Future<void> main() async {
   );
 }
 
+/// Hosts a release download may redirect to. These binaries are executed in
+/// users' browsers, so a redirect must not be able to point the build at
+/// arbitrary content.
+const _allowedHosts = {
+  'github.com',
+  'objects.githubusercontent.com',
+  'release-assets.githubusercontent.com',
+  'raw.githubusercontent.com',
+};
+
 Future<void> _download(String url, String target) async {
   stdout.writeln('Downloading $url');
   final client = HttpClient();
   try {
-    var uri = Uri.parse(url);
+    var uri = _checkedUri(Uri.parse(url));
     // GitHub release downloads redirect to a signed URL.
     for (var redirects = 0; redirects < 5; redirects++) {
       final response = await (await client.getUrl(uri)).close();
@@ -43,7 +53,7 @@ Future<void> _download(String url, String target) async {
         final location = response.headers.value(HttpHeaders.locationHeader);
         if (location == null) break;
         await response.drain<void>();
-        uri = uri.resolve(location);
+        uri = _checkedUri(uri.resolve(location));
         continue;
       }
       if (response.statusCode != HttpStatus.ok) {
@@ -58,4 +68,11 @@ Future<void> _download(String url, String target) async {
   } finally {
     client.close();
   }
+}
+
+Uri _checkedUri(Uri uri) {
+  if (uri.scheme != 'https' || !_allowedHosts.contains(uri.host)) {
+    throw HttpException('Refusing to download from $uri');
+  }
+  return uri;
 }

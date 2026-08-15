@@ -19,11 +19,17 @@ class _StorageWarningBannerState extends State<StorageWarningBanner> {
   bool _dismissed = false;
 
   @override
-  Widget build(BuildContext context) {
-    final report = AppDatabase.webStorageReport;
-    if (_dismissed || report == null || report.isDurable) {
-      return const SizedBox.shrink();
-    }
+  Widget build(BuildContext context) => ValueListenableBuilder(
+    valueListenable: AppDatabase.webStorageReport,
+    builder: (context, report, _) {
+      if (_dismissed || report == null || report.isDurable) {
+        return const SizedBox.shrink();
+      }
+      return _banner(context);
+    },
+  );
+
+  Widget _banner(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     return MaterialBanner(
       content: Column(

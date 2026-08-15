@@ -110,6 +110,33 @@ void main() {
 
       expect(await rallies.findStations('rally-1'), [overlay]);
     });
+
+    test('a removed station can be added to the rally again', () async {
+      await rallies.save(rally('rally-1'));
+      await stations.save(station('station-a'));
+      await rallies.saveStation(
+        RallyStation(
+          id: 'rs-1',
+          rallyId: 'rally-1',
+          stationId: 'station-a',
+          createdAt: testMoment,
+          updatedAt: testMoment,
+        ),
+      );
+      await rallies.removeStation('rs-1', deletedAt: testMoment);
+
+      final readded = RallyStation(
+        id: 'rs-2',
+        rallyId: 'rally-1',
+        stationId: 'station-a',
+        stampLocation: 'Information desk',
+        createdAt: testMoment,
+        updatedAt: testMoment,
+      );
+      await rallies.saveStation(readded);
+
+      expect(await rallies.findStations('rally-1'), [readded]);
+    });
   });
 
   group('routes', () {

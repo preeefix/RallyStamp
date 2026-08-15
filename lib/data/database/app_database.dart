@@ -47,7 +47,11 @@ class AppDatabase extends _$AppDatabase {
 
   /// Reports how the web database was opened; null on native platforms and
   /// until the database has been opened.
-  static WebStorageReport? webStorageReport;
+  ///
+  /// A notifier rather than a plain field because the value only arrives once
+  /// the first query opens the database, after the UI has already built.
+  static final ValueNotifier<WebStorageReport?> webStorageReport =
+      ValueNotifier(null);
 
   @override
   int get schemaVersion => 1;
@@ -71,7 +75,7 @@ class AppDatabase extends _$AppDatabase {
       sqlite3Wasm: Uri.parse('sqlite3.wasm'),
       driftWorker: Uri.parse('drift_worker.js'),
       onResult: (result) {
-        webStorageReport = WebStorageReport(
+        webStorageReport.value = WebStorageReport(
           implementation: result.chosenImplementation.name,
           missingFeatures: [
             for (final feature in result.missingFeatures) feature.name,

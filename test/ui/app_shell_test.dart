@@ -13,7 +13,10 @@ void main() {
   late AppDatabase database;
 
   setUp(() => database = AppDatabase(NativeDatabase.memory()));
-  tearDown(() => database.close());
+  tearDown(() {
+    AppDatabase.webStorageReport.value = null;
+    return database.close();
+  });
 
   Future<void> pumpApp(WidgetTester tester) async {
     await tester.pumpWidget(
@@ -82,6 +85,28 @@ void main() {
     expect(find.text('Tokyo'), findsOneWidget);
     expect(find.text('Yamanote'), findsOneWidget);
     expect(find.text('No stations yet'), findsNothing);
+
+    await closeApp(tester);
+  });
+
+  testWidgets('non-durable storage warns once the database reports back', (
+    tester,
+  ) async {
+    await pumpApp(tester);
+    expect(find.text('Storage may not be durable'), findsNothing);
+
+    // The report only arrives after the database opens, i.e. after first build.
+    AppDatabase.webStorageReport.value = const WebStorageReport(
+      implementation: 'inMemory',
+      missingFeatures: ['sharedWorkers'],
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Storage may not be durable'), findsOneWidget);
+
+    await tester.tap(find.text('Dismiss'));
+    await tester.pumpAndSettle();
+    expect(find.text('Storage may not be durable'), findsNothing);
 
     await closeApp(tester);
   });
