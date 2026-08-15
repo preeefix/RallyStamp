@@ -57,8 +57,12 @@ class _StationPickerScreenState extends ConsumerState<StationPickerScreen> {
       body: available.isEmpty
           ? EmptyState(
               icon: Icons.train_outlined,
-              title: l10n.stationsEmpty,
-              message: l10n.stationsEmptyHint,
+              title: stations.isEmpty
+                  ? l10n.stationsEmpty
+                  : l10n.allStationsAdded,
+              message: stations.isEmpty
+                  ? l10n.stationsEmptyHint
+                  : l10n.allStationsAddedHint,
             )
           : Column(
               children: [

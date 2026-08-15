@@ -145,8 +145,13 @@ final rallyServiceProvider = Provider<RallyService>(
   ),
 );
 
-final rallyProvider = FutureProvider.family<Rally?, String>(
-  (ref, id) => ref.watch(rallyRepositoryProvider).findById(id),
+/// Watched rather than fetched once, so detail and form screens always render
+/// the stored rally instead of a value cached before the last edit.
+final rallyProvider = StreamProvider.family<Rally?, String>(
+  (ref, id) => ref
+      .watch(rallyRepositoryProvider)
+      .watchAll()
+      .map((rallies) => rallies.firstWhereOrNull((rally) => rally.id == id)),
 );
 
 final rallyStationsProvider = StreamProvider.family<List<RallyStation>, String>(

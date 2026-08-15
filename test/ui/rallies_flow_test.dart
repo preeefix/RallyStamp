@@ -57,6 +57,58 @@ void main() {
     await closeApp(tester);
   });
 
+  testWidgets('a second edit builds on the first instead of reverting it', (
+    tester,
+  ) async {
+    await rallies.save(rally('rally-a', name: 'Spring rally'));
+
+    await pumpApp(tester);
+    await tapTab(tester, 'Rallies');
+    await tester.tap(find.text('Spring rally'));
+    await tester.pumpAndSettle();
+
+    for (final name in ['Spring rally 2026', 'Spring rally 2027']) {
+      await tester.tap(find.byIcon(Icons.edit_outlined));
+      await tester.pumpAndSettle();
+      await tester.enterText(find.widgetWithText(TextFormField, 'Name'), name);
+      await tester.tap(find.widgetWithText(TextButton, 'Save'));
+      await tester.pumpAndSettle();
+      expect(find.text(name), findsWidgets);
+    }
+
+    expect((await rallies.findById('rally-a'))?.name, 'Spring rally 2027');
+
+    await closeApp(tester);
+  });
+
+  testWidgets('the picker says so when every station is already added', (
+    tester,
+  ) async {
+    await rallies.save(rally('rally-a', name: 'Spring rally'));
+    await stations.save(station('station-a', name: 'Tokyo'));
+    await rallies.saveStation(
+      RallyStation(
+        id: 'rally-station-a',
+        rallyId: 'rally-a',
+        stationId: 'station-a',
+        createdAt: testMoment,
+        updatedAt: testMoment,
+      ),
+    );
+
+    await pumpApp(tester);
+    await tapTab(tester, 'Rallies');
+    await tester.tap(find.text('Spring rally'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.widgetWithText(FloatingActionButton, 'Add stations'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Every station is already in this rally'), findsOneWidget);
+    expect(find.text('No stations yet'), findsNothing);
+
+    await closeApp(tester);
+  });
+
   testWidgets('stations can be added to a rally and given stamp details', (
     tester,
   ) async {

@@ -313,6 +313,14 @@
       }
     }
   },
+  "allStationsAdded": "Every station is already in this rally",
+  "@allStationsAdded": {
+    "description": "Empty state of the station picker when nothing is left to add"
+  },
+  "allStationsAddedHint": "Add a new station to your library to include it in this rally.",
+  "@allStationsAddedHint": {
+    "description": "Hint below the picker's all-stations-added empty state"
+  },
   "removeStationTitle": "Remove from rally?",
   "@removeStationTitle": {
     "description": "Title of the confirmation removing a station from a rally"

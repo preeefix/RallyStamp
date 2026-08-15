@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../domain/entities/station.dart';
@@ -90,8 +91,15 @@ final stationServiceProvider = Provider<StationService>(
   ),
 );
 
-final stationProvider = FutureProvider.family<Station?, String>(
-  (ref, id) => ref.watch(stationRepositoryProvider).findById(id),
+/// Watched rather than fetched once, so an edited station is never rendered
+/// from a value cached before the last save.
+final stationProvider = StreamProvider.family<Station?, String>(
+  (ref, id) => ref
+      .watch(stationRepositoryProvider)
+      .watchAll()
+      .map(
+        (stations) => stations.firstWhereOrNull((station) => station.id == id),
+      ),
 );
 
 /// Stations matching a case-insensitive query over name, local name, aliases
