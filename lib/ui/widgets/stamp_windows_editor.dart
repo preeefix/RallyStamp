@@ -173,12 +173,19 @@ class _StampWindowDialogState extends State<_StampWindowDialog> {
           child: Text(l10n.cancel),
         ),
         FilledButton(
+          // Copying the edited window keeps fields this dialog cannot edit,
+          // such as the validity range of an imported window.
           onPressed: () => Navigator.of(context).pop(
-            StampWindow(
-              start: _fromTimeOfDay(_start),
-              end: _fromTimeOfDay(_end),
-              daysOfWeek: [..._days]..sort(),
-            ),
+            (widget.initial ??
+                    StampWindow(
+                      start: _fromTimeOfDay(_start),
+                      end: _fromTimeOfDay(_end),
+                    ))
+                .copyWith(
+                  start: _fromTimeOfDay(_start),
+                  end: _fromTimeOfDay(_end),
+                  daysOfWeek: [..._days]..sort(),
+                ),
           ),
           child: Text(l10n.save),
         ),

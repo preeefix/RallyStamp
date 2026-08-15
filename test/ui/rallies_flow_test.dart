@@ -81,6 +81,28 @@ void main() {
     await closeApp(tester);
   });
 
+  testWidgets('a rally without stations still shows its details', (
+    tester,
+  ) async {
+    await rallies.save(
+      rally('rally-a', name: 'Spring rally').copyWith(
+        organizer: 'JR East',
+        description: 'Ten stamps around the Yamanote line.',
+      ),
+    );
+
+    await pumpApp(tester);
+    await tapTab(tester, 'Rallies');
+    await tester.tap(find.text('Spring rally'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('No stations in this rally'), findsOneWidget);
+    expect(find.text('JR East'), findsOneWidget);
+    expect(find.text('Ten stamps around the Yamanote line.'), findsOneWidget);
+
+    await closeApp(tester);
+  });
+
   testWidgets('the picker says so when every station is already added', (
     tester,
   ) async {

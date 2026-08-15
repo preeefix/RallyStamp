@@ -120,10 +120,17 @@ class _StationTile extends ConsumerWidget {
   Future<void> _openLink(BuildContext context, String url) async {
     final messenger = ScaffoldMessenger.of(context);
     final l10n = AppLocalizations.of(context);
-    final launched = await launchUrl(
-      Uri.parse(url),
-      mode: LaunchMode.externalApplication,
-    );
+    // A link with no handler either returns false or throws, depending on the
+    // platform, and an imported link may not even parse.
+    var launched = false;
+    try {
+      launched = await launchUrl(
+        Uri.parse(url),
+        mode: LaunchMode.externalApplication,
+      );
+    } catch (_) {
+      launched = false;
+    }
     if (!launched) {
       messenger.showSnackBar(SnackBar(content: Text(l10n.openLinkFailed)));
     }
