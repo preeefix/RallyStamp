@@ -38,7 +38,9 @@ abstract interface class RallyRepository {
 }
 
 abstract interface class RouteRepository {
+  Stream<List<RallyRoute>> watchAll();
   Stream<List<RallyRoute>> watchByRally(String rallyId);
+  Stream<RallyRoute?> watchById(String id);
   Future<List<RallyRoute>> findByRally(String rallyId);
   Future<RallyRoute?> findById(String id);
   Future<void> save(RallyRoute route);

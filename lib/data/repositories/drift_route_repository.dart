@@ -11,6 +11,26 @@ class DriftRouteRepository implements RouteRepository {
   final AppDatabase _db;
 
   @override
+  Stream<List<RallyRoute>> watchAll() {
+    final routes = _db.select(_db.routeRows)
+      ..where((row) => row.deletedAt.isNull())
+      ..orderBy([(row) => OrderingTerm(expression: row.name)]);
+    return routes.watch().asyncMap(_withStops);
+  }
+
+  /// Only the route row is watched, which is enough because [save] always
+  /// rewrites it in the same transaction as its stops.
+  @override
+  Stream<RallyRoute?> watchById(String id) {
+    final route = _db.select(_db.routeRows)
+      ..where((row) => row.id.equals(id) & row.deletedAt.isNull());
+    return route.watchSingleOrNull().asyncMap((row) async {
+      if (row == null) return null;
+      return row.toDomain(await _stopsOf(row.id));
+    });
+  }
+
+  @override
   Stream<List<RallyRoute>> watchByRally(String rallyId) {
     final routes = _db.select(_db.routeRows)
       ..where((row) => row.rallyId.equals(rallyId) & row.deletedAt.isNull())

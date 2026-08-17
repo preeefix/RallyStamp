@@ -398,5 +398,129 @@
         "type": "String"
       }
     }
+  },
+  "newRoute": "New route",
+  "@newRoute": {
+    "description": "Title of the route form when creating a route"
+  },
+  "editRoute": "Edit route",
+  "@editRoute": {
+    "description": "Title of the route form when editing a route"
+  },
+  "deleteRouteTitle": "Delete route?",
+  "@deleteRouteTitle": {
+    "description": "Title of the route delete confirmation dialog"
+  },
+  "deleteRouteBody": "{name} will be hidden from lists. Runs started from it keep their plan.",
+  "@deleteRouteBody": {
+    "description": "Body of the route delete confirmation dialog",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "chooseRally": "Choose a rally",
+  "@chooseRally": {
+    "description": "Title of the rally picker shown before a route is created"
+  },
+  "chooseRallyHint": "A route plans the stations of one rally.",
+  "@chooseRallyHint": {
+    "description": "Hint below the rally picker for a new route"
+  },
+  "fieldAuthor": "Author",
+  "@fieldAuthor": {
+    "description": "Label of the route author field"
+  },
+  "fieldPlannedStartTime": "Planned start time",
+  "@fieldPlannedStartTime": {
+    "description": "Label of the time of day a route is planned to start at"
+  },
+  "routeStopsEmpty": "No stops in this route",
+  "@routeStopsEmpty": {
+    "description": "Empty state on the route builder"
+  },
+  "routeStopsEmptyHint": "Add the rally's stations, then drag them into the order you will visit them.",
+  "@routeStopsEmptyHint": {
+    "description": "Hint below the route stops empty state"
+  },
+  "addStops": "Add stops",
+  "@addStops": {
+    "description": "Title of the route stop picker and label of the button opening it"
+  },
+  "addStopsSelected": "Add {count} selected",
+  "@addStopsSelected": {
+    "description": "Label of the stop picker button confirming the selection",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "allRallyStationsAdded": "Every station of this rally is already in the route",
+  "@allRallyStationsAdded": {
+    "description": "Empty state of the stop picker when nothing is left to add"
+  },
+  "allRallyStationsAddedHint": "Add stations to the rally to plan them here.",
+  "@allRallyStationsAddedHint": {
+    "description": "Hint below the stop picker's all-stations-added empty state"
+  },
+  "addExtraStop": "Add extra stop",
+  "@addExtraStop": {
+    "description": "Label of the action adding a stop that collects no stamp"
+  },
+  "extraStop": "Extra stop",
+  "@extraStop": {
+    "description": "Fallback name of an extra stop without a label"
+  },
+  "removeStopTitle": "Remove stop?",
+  "@removeStopTitle": {
+    "description": "Title of the confirmation removing a stop from a route"
+  },
+  "removeStopBody": "{name} will be removed from this route.",
+  "@removeStopBody": {
+    "description": "Body of the confirmation removing a stop from a route",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "reorderStop": "Reorder",
+  "@reorderStop": {
+    "description": "Tooltip of the drag handle reordering route stops"
+  },
+  "stopDetails": "Stop details",
+  "@stopDetails": {
+    "description": "Title of the route stop editor"
+  },
+  "fieldTravelMinutes": "Travel minutes",
+  "@fieldTravelMinutes": {
+    "description": "Label of the planned minutes spent travelling to a stop"
+  },
+  "fieldDwellMinutes": "Minutes at the stop",
+  "@fieldDwellMinutes": {
+    "description": "Label of the planned minutes spent at a stop"
+  },
+  "durationHoursMinutes": "{hours}h {minutes}m",
+  "@durationHoursMinutes": {
+    "description": "A duration of an hour or more",
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "durationMinutes": "{minutes}m",
+  "@durationMinutes": {
+    "description": "A duration under an hour",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
   }
 }

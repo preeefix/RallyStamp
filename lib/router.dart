@@ -6,6 +6,10 @@ import 'ui/screens/rallies_screen.dart';
 import 'ui/screens/rally_detail_screen.dart';
 import 'ui/screens/rally_form_screen.dart';
 import 'ui/screens/rally_station_screen.dart';
+import 'ui/screens/route_builder_screen.dart';
+import 'ui/screens/route_form_screen.dart';
+import 'ui/screens/route_stop_picker_screen.dart';
+import 'ui/screens/route_stop_screen.dart';
 import 'ui/screens/routes_screen.dart';
 import 'ui/screens/run_screen.dart';
 import 'ui/screens/station_form_screen.dart';
@@ -75,6 +79,48 @@ GoRouter createRouter() => GoRouter(
             GoRoute(
               path: '/routes',
               builder: (context, state) => const RoutesScreen(),
+              routes: [
+                // Declared before ':routeId' so 'new' is not read as an id.
+                GoRoute(
+                  path: 'new',
+                  builder: (context, state) => const RouteRallyPickerScreen(),
+                  routes: [
+                    GoRoute(
+                      path: ':rallyId',
+                      builder: (context, state) => RouteFormScreen(
+                        rallyId: state.pathParameters['rallyId'],
+                      ),
+                    ),
+                  ],
+                ),
+                GoRoute(
+                  path: ':routeId',
+                  builder: (context, state) => RouteBuilderScreen(
+                    routeId: state.pathParameters['routeId']!,
+                  ),
+                  routes: [
+                    GoRoute(
+                      path: 'edit',
+                      builder: (context, state) => RouteFormScreen(
+                        routeId: state.pathParameters['routeId'],
+                      ),
+                    ),
+                    GoRoute(
+                      path: 'add-stops',
+                      builder: (context, state) => RouteStopPickerScreen(
+                        routeId: state.pathParameters['routeId']!,
+                      ),
+                    ),
+                    GoRoute(
+                      path: 'stops/:stopId',
+                      builder: (context, state) => RouteStopScreen(
+                        routeId: state.pathParameters['routeId']!,
+                        stopId: state.pathParameters['stopId']!,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),
