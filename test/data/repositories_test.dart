@@ -188,6 +188,37 @@ void main() {
       await routes.delete('route-1', deletedAt: testMoment);
       expect(await routes.findByRally('rally-1'), isEmpty);
     });
+
+    test('watchAll spans rallies and drops deleted routes', () async {
+      await rallies.save(rally('rally-2'));
+      await routes.save(threeStopRoute());
+      await routes.save(route('route-2', rallyId: 'rally-2'));
+
+      expect(
+        await routes.watchAll().firstWhere((list) => list.length == 2),
+        hasLength(2),
+      );
+
+      await routes.delete('route-2', deletedAt: testMoment);
+      expect(
+        (await routes.watchAll().firstWhere(
+          (list) => list.length == 1,
+        )).single.id,
+        'route-1',
+      );
+    });
+
+    test('watchById emits the stops of the route it follows', () async {
+      await routes.save(threeStopRoute());
+
+      final stored = await routes
+          .watchById('route-1')
+          .firstWhere((found) => found != null);
+      expect(stored?.orderedStops.map((stop) => stop.id), ['a', 'b', 'lunch']);
+
+      await routes.delete('route-1', deletedAt: testMoment);
+      expect(await routes.watchById('route-1').first, isNull);
+    });
   });
 
   group('runs', () {
